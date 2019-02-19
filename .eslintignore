@@ -1,4 +1,2 @@
 build/*.js
 config/*.js
-// eslint-disable-next-line
-eslint-disable

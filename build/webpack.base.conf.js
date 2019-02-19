@@ -55,9 +55,22 @@ let baseWebpackConfig = {
   module: {
     rules: [
       {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src'), resolve('test')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
+      {
         test: /\.vue$/,
         loader: 'mpvue-loader',
         options: vueLoaderConfig
+      },
+      {
+        test: /\.less$/,
+        loader: "style-loader!css-loader!less-loader",
       },
       {
         test: /\.js$/,
@@ -120,19 +133,13 @@ let baseWebpackConfig = {
 }
 
 // 针对百度小程序，由于不支持通过 miniprogramRoot 进行自定义构建完的文件的根路径
-// 所以需要将项目根路径下面的 project.swan.json 拷贝到构建目录
-// 然后百度开发者工具将 dist/swan 作为项目根目录打
-const projectConfigMap = {
-  tt: '../project.config.json',
-  swan: '../project.swan.json'
-}
-
-const PLATFORM = process.env.PLATFORM
-if (/^(swan)|(tt)$/.test(PLATFORM)) {
+// 所以需要将项目根路径下面的 project.swan.json 拷贝到 dist/swan 下
+// 然后百度开发者工具将 dist/swan 作为项目根目录打开进行调试
+if (process.env.PLATFORM === 'swan') {
   baseWebpackConfig = merge(baseWebpackConfig, {
     plugins: [
       new CopyWebpackPlugin([{
-        from: path.resolve(__dirname, projectConfigMap[PLATFORM]),
+        from: path.resolve(__dirname, '../project.swan.json'),
         to: path.resolve(config.build.assetsRoot)
       }])
     ]
@@ -140,3 +147,4 @@ if (/^(swan)|(tt)$/.test(PLATFORM)) {
 }
 
 module.exports = baseWebpackConfig
+
