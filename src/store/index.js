@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 const state = {
   isLogin: false,
-  token: wx.getStorageSync('token'),
+  userToken: wx.getStorageSync('userToken'),
   username: ''
 }
 

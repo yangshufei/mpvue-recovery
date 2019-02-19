@@ -19,6 +19,10 @@
   "dependencies": {
     "blueimp-md5": "^2.10.0",
     "es6-promise": "^4.2.6",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.4.13",
     "mpvue": "^1.0.11",
     "pug": "^2.0.3",
     "vuex": "^3.0.1"
