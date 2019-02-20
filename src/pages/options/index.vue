@@ -101,14 +101,19 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      regForm: {
+        username: 'yanggg',
+        password: '444444',
+        checkPassword: '444444'
+      }
     }
   },
   computed: {
     ...mapGetters(['isLogin'])
   },
   async mounted () {
-    let data = await homeApi.homeList()
+    let data = await homeApi.userRegister(this.regForm)
     this.topics = data
     setTimeout(() => {
       console.log(this.isLogin)

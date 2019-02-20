@@ -1,6 +1,7 @@
 import MD5 from 'blueimp-md5'
 import Es6Promise from 'es6-promise'
-let apiHost = 'https://cnodejs.org'
+// let apiHost = 'https://cnodejs.org'
+let apiHost = 'http://localhost:8888'
 Es6Promise.polyfill()
 
 function wxRequest (url, data, cookie, method = 'POST') {

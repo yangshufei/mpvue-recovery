@@ -19,12 +19,16 @@
   "dependencies": {
     "blueimp-md5": "^2.10.0",
     "es6-promise": "^4.2.6",
+    "jsonwebtoken": "^8.4.0",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "moment": "^2.24.0",
     "mongoose": "^5.4.13",
     "mpvue": "^1.0.11",
+    "objectid-to-timestamp": "^1.3.0",
     "pug": "^2.0.3",
+    "sha1": "^1.1.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
