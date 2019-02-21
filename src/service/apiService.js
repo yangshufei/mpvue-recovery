@@ -16,5 +16,8 @@ export default {
   // 删除用户
   delUser (data) {
     return post('/api/delUser', data)
+  },
+  getOpneid (code) {
+    return post('/api/userAppid', {code})
   }
 }

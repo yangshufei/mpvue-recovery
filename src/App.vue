@@ -1,4 +1,5 @@
 <script>
+import homeApi from '@/service/apiService.js'
 export default {
   created () {
     // 调用API从本地缓存中获取数据
@@ -7,6 +8,15 @@ export default {
     wx.setStorageSync('logs', logs)
 
     console.log('app created and cache logs by setStorageSync')
+
+    wx.login({
+      success: function (res) {
+        console.log(res.code)
+        homeApi.getOpneid(res.code).then(({openId}) => {
+          console.log(openId)
+        })
+      }
+    })
   }
 }
 </script>

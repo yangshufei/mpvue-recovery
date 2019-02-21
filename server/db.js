@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/vue-test')
+mongoose.connect('mongodb://localhost/vue-appid')
 
 let db = mongoose.connection
 // 防止Mongoose: mpromise 错误

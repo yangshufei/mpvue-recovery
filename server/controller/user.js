@@ -7,6 +7,10 @@ const sha1 = require('sha1')
 // createToken
 const createToken = require('../token/createToken.js')
 
+const koa2Req = require('koa2-request')
+const appId = 'wx0422191f61fd574c'
+const AppSecret = '57e4377509cfcf9024dd7f955c7235fd'
+
 // 数据库的操作
 // 根据用户名查找用户
 const findUser = (username) => {
@@ -96,10 +100,10 @@ const Reg = async (ctx) => {
   })
   // 将objectid转换为用户创建时间(可以不用)
   user.create_time = moment(objectIdToTimestamp(user._id)).format('YYYY-MM-DD HH:mm:ss')
-  console.log('aaa')
+  // console.log('aaa')
   let doc = await findUser(user.username)
   if (doc) {
-    console.log('用户名已经存在')
+    // console.log('用户名已经存在')
     ctx.status = 200
     ctx.body = {
       success: false
@@ -142,9 +146,25 @@ const DelUser = async (ctx) => {
   }
 }
 
+const userAppid = async (ctx) => {
+  let {code} = ctx.request.body
+  console.log(code)
+  const res = await koa2Req({
+    url: `https://api.weixin.qq.com/sns/jscode2session?appid=${appId}&secret=${AppSecret}&js_code=${code}&grant_type=authorization_code`
+  })
+  let body = JSON.parse(res.body)
+  console.log(body)
+  let {openid, session_key} = body // 提取session_key解密
+  ctx.body = {
+    openId: openid,
+    session_key: session_key
+  }
+}
+
 module.exports = {
   Login,
   Reg,
   GetAllUsers,
-  DelUser
+  DelUser,
+  userAppid
 }
